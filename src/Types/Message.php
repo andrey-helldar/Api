@@ -31,6 +31,7 @@ class Message extends BaseType implements TypeInterface
         'reply_to_message' => Message::class,
         'text' => true,
         'entities' => ArrayOfMessageEntity::class,
+        'caption_entities' => ArrayOfMessageEntity::class,
         'audio' => Audio::class,
         'document' => Document::class,
         'photo' => ArrayOfPhotoSize::class,
@@ -55,7 +56,8 @@ class Message extends BaseType implements TypeInterface
         'invoice' => Invoice::class,
         'successful_payment' => SuccessfulPayment::class,
         'forward_signature' => true,
-        'author_signature' => true
+        'author_signature' => true,
+        'connected_website' => true
     ];
 
     /**
@@ -302,6 +304,21 @@ class Message extends BaseType implements TypeInterface
      * @var string
      */
     protected $authorSignature;
+
+    /**
+     * Optional. For messages with a caption, special entities like usernames,
+     * URLs, bot commands, etc. that appear in the caption
+     *
+     * @var ArrayOfMessageEntity
+     */
+    protected $captionEntities;
+
+    /**
+     * Optional. The domain name of the website on which the user has logged in.
+     *
+     * @var string
+     */
+    protected $connectedWebsite;
 
     /**
      * @return string
@@ -867,5 +884,37 @@ class Message extends BaseType implements TypeInterface
     public function setAuthorSignature($authorSignature)
     {
         $this->authorSignature = $authorSignature;
+    }
+
+    /**
+     * @return ArrayOfMessageEntity
+     */
+    public function getCaptionEntities()
+    {
+        return $this->captionEntities;
+    }
+
+    /**
+     * @param ArrayOfMessageEntity $captionEntities
+     */
+    public function setCaptionEntities($captionEntities)
+    {
+        $this->captionEntities = $captionEntities;
+    }
+
+    /**
+     * @return string
+     */
+    public function getConnectedWebsite()
+    {
+        return $this->connectedWebsite;
+    }
+
+    /**
+     * @param string $connectedWebsite
+     */
+    public function setConnectedWebsite($connectedWebsite)
+    {
+        $this->connectedWebsite = $connectedWebsite;
     }
 }
